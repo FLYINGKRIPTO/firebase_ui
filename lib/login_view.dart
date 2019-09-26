@@ -51,7 +51,7 @@ class _LoginViewState extends State<LoginView> {
         try {
           AuthCredential credential = GoogleAuthProvider.getCredential(
               idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
-          FirebaseUser user = await _auth.signInWithCredential(credential);
+          FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
           print(user);
         } catch (e) {
           showErrorDialog(context, e.details);
@@ -67,7 +67,7 @@ class _LoginViewState extends State<LoginView> {
       try {
         AuthCredential credential = FacebookAuthProvider.getCredential(
             accessToken: result.accessToken.token);
-        FirebaseUser user = await _auth.signInWithCredential(credential);
+        FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
         print(user);
       } catch (e) {
         showErrorDialog(context, e.details);
